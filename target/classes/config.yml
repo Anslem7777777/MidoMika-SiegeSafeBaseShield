@@ -1,0 +1,4 @@
+enable: true
+player-area-limit: 3
+repairCoolDown: 30
+area-block-limit: 7000

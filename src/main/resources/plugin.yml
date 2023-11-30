@@ -1,0 +1,9 @@
+name: SiegeSafeBaseShield
+version: '${project.version}'
+main: me.mika.midomikasiegesafebaseshield.SiegeSafeBaseShield
+api-version: '1.19'
+commands:
+#  taskstop:
+#    description: stop task
+  SSBS:
+    description: save, delete, list and select commands
