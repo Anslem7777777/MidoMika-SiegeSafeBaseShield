@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="MidoMika-SiegeSafeBaseShield:jar">
+    <output-path>$USER_HOME$/Desktop/minecraft_server 1.19.4/plugins</output-path>
+    <root id="archive" name="MidoMika-SiegeSafeBaseShield.jar">
+      <element id="module-output" name="MidoMika-SiegeSafeBaseShield" />
+    </root>
+  </artifact>
+</component>
