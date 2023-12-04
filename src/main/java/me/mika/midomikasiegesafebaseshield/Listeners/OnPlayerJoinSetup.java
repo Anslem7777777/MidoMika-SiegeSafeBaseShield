@@ -30,6 +30,7 @@ public class OnPlayerJoinSetup implements Listener {
         File PlayerSelectedAreaFile = new File(Bukkit.getServer().getPluginManager().getPlugin("SiegeSafeBaseShield").getDataFolder(), "PlayerSelectedAreaConfig.yml");
         FileConfiguration PlayerSelectedAreaConfig = YamlConfiguration.loadConfiguration(PlayerSelectedAreaFile);
         ItemStack handOnItem = p.getInventory().getItemInMainHand();
+        OnBreakSelectedArea.playerIsBossBarCreatedMap.put(p.getUniqueId(), false);
 
         if (handOnItem != null && handOnItem.getType() == Material.STICK) {
 //            ChangeSelectedBlock.ChangeBorderToGold(p);

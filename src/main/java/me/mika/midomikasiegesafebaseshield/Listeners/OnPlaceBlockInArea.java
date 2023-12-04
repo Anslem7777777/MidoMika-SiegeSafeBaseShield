@@ -388,11 +388,42 @@ public class OnPlaceBlockInArea implements Listener {
                 }
             }
 
-            if (allBlockInConfig.contains(igniteBlockWorldString)){
-                igniteBlock.setType(Material.AIR);
-                e.setCancelled(true);
+            int x = 0;
+            int y = -1;
+            int z = -1;
+            for ( x = -1; x < 3; x++) {
+                if (x < 2) {
+                    if (allBlockInConfig.contains(setXYZ(igniteBlock, x, 0, 0))) {
+                        igniteBlock.setType(Material.AIR);
+                        e.setCancelled(true);
 
+                    }
+                }
+                if (y < 2) {
+                    if (allBlockInConfig.contains(setXYZ(igniteBlock, 0, y, 0))) {
+                        igniteBlock.setType(Material.AIR);
+                        e.setCancelled(true);
+
+                    }
+                    y++;
+                }
+                if (z < 2){
+                    if (allBlockInConfig.contains(setXYZ(igniteBlock, 0, 0, z))) {
+                        igniteBlock.setType(Material.AIR);
+                        e.setCancelled(true);
+
+                    }
+                    z++;
+                }
             }
+
+//            if (allBlockInConfig.contains(igniteBlockWorldString)){
+//                igniteBlock.setType(Material.AIR);
+//                e.setCancelled(true);
+//
+//            }
+
+            allBlockInConfig.clear();
 
         }
 

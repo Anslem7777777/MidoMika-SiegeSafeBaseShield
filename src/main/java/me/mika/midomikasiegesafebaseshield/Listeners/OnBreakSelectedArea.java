@@ -113,8 +113,9 @@ public class OnBreakSelectedArea implements Listener {
             }
             recordCount = 0;
         }
-        selectedAreaOriBlocks.clear();
-
+        if (selectedAreaOriBlocks != null) {
+            selectedAreaOriBlocks.clear();
+        }
 
         //检查是不是在config里的数据，用于排除不是normal block
         if (String.valueOf(allRecordBlock.values().toString().contains(stringPlayerBreakBlockLocation)).equals("true")) {

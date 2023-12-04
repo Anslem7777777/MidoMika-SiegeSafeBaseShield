@@ -51,6 +51,7 @@ public class OnPlayerLeave implements Listener {
         }
 
         if (OnBreakSelectedArea.playerIsBossBarCreatedMap.get(p.getUniqueId()) != null && OnBreakSelectedArea.baseHealthBar != null) {
+            OnBreakSelectedArea.baseHealthBar = new BaseHealthBar(SiegeSafeBaseShield.getPlugin(), p);
             OnBreakSelectedArea.baseHealthBar.hideBossBar();
             OnBreakSelectedArea.playerIsBossBarCreatedMap.put(p.getUniqueId(), false);
 

@@ -58,7 +58,7 @@ public class ParticleTasks extends BukkitRunnable {
 
                                                 // 在每个位置生成粒子效果
                                                 // 使用 Particle.REDSTONE 创建有颜色的粒子效果
-                                                Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(255, 215, 0), 2f);
+                                                Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(255, 215, 0), 1f);
 
                                                 // 在位置生成带颜色的粒子效果
                                                 player.spawnParticle(Particle.REDSTONE, location.add(0.5, 1, 0.5), 1, 0, 0, 0, 0, dustOptions);
@@ -79,8 +79,6 @@ public class ParticleTasks extends BukkitRunnable {
         // 启动任务
         BukkitTask task = runTaskTimer(plugin, 0, 5); // 以5 ticks为周期执行任务
 
-        // 你可以保存任务实例以后停止任务
-        // this.cancel() 可以在任何时候调用以停止任务
     }
 
 }

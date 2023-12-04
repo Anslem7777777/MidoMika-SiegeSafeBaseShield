@@ -48,8 +48,11 @@ public class OnPlayerItemHeld implements Listener {
         playerIsGoldBorderBooleanMap.put(playerUUID, isGoldBorder);
 
         Player player = OnPlayerItemHeld.onHotbarChangePlayer;
-        ParticleTasks particleTask = new ParticleTasks(plugin, player);
-        particleTask.start();
+        if (isGoldBorder == true) {
+            ParticleTasks particleTask = new ParticleTasks(plugin, player);
+            particleTask.start();
+
+        }
     }
 
     @EventHandler
