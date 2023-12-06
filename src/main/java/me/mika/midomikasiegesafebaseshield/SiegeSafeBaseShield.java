@@ -10,6 +10,7 @@ import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -43,6 +44,8 @@ public final class SiegeSafeBaseShield extends JavaPlugin {
 
         instance = this;
 
+        PluginManager pM = getServer().getPluginManager();
+
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
@@ -50,14 +53,15 @@ public final class SiegeSafeBaseShield extends JavaPlugin {
         ConfigSetup.get().options().copyDefaults(true);
         ConfigSetup.save();
 
-        getServer().getPluginManager().registerEvents(new SelectArea(this), this);
-        getServer().getPluginManager().registerEvents(new OnPlayerItemHeld(this), this);
-        getServer().getPluginManager().registerEvents(new OnBreakSelectedArea(this), this);
-        getServer().getPluginManager().registerEvents(new OnTNTBreakSelectedArea(this), this);
-        getServer().getPluginManager().registerEvents(new OnPlaceBlockInArea(this), this);
-        getServer().getPluginManager().registerEvents(new OnPlayerJoinSetup(this), this);
-        getServer().getPluginManager().registerEvents(new OnPlayerLeave(), this);
-        getServer().getPluginManager().registerEvents(new OnPlacePiston(), this);
+        pM.registerEvents(new SelectArea(this), this);
+        pM.registerEvents(new OnPlayerItemHeld(this), this);
+        pM.registerEvents(new OnBreakSelectedArea(this), this);
+        pM.registerEvents(new OnTNTBreakSelectedArea(this), this);
+        pM.registerEvents(new OnPlaceBlockInArea(this), this);
+        pM.registerEvents(new OnPlayerJoinSetup(this), this);
+        pM.registerEvents(new OnPlayerLeave(), this);
+        pM.registerEvents(new OnPlacePiston(), this);
+        pM.registerEvents(new OnEnteredOthersPlayerBase(), this);
 
 //        getCommand("taskstop").setExecutor(new Task(this));
         getCommand("SSBS").setExecutor(new SSBSCommandsManager());
