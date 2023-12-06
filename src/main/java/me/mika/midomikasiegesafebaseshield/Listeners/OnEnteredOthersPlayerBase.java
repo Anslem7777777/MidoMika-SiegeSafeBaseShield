@@ -16,6 +16,7 @@ import java.io.File;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -24,6 +25,7 @@ public class OnEnteredOthersPlayerBase implements Listener {
     private Set<String> selectedAreaOriBlocks;
     private static Map<UUID, LocalDateTime> playerTime = new HashMap<>();
     private static Map<UUID, Boolean> playerIsEnteredOthersBase = new HashMap<>();
+//    private static Map<UUID, List<UUID>> playerBaseAccess = new HashMap<>();
 
     @EventHandler
     public void onEnterOthersBasePlayerBase(PlayerMoveEvent e){

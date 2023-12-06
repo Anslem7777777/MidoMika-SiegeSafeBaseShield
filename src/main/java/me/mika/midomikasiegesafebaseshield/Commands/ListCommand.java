@@ -1,4 +1,8 @@
 package me.mika.midomikasiegesafebaseshield.Commands;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -57,7 +61,17 @@ public class ListCommand extends SubCommands{
                 }else {
                     player.sendMessage(ChatColor.YELLOW + "Saved Area List ("+ ChatColor.YELLOW + playerLitmitLeft + ChatColor.YELLOW + "/" + ChatColor.YELLOW + areaLimit + ChatColor.YELLOW + "): ");
                     for (int i = 0; i < areaName.size(); i++) {
-                        player.sendMessage(ChatColor.YELLOW + "" + (i + 1)  + ". " + ChatColor.GREEN + areaName.get(i));
+                        TextComponent areaNameComponent = new TextComponent(String.format(areaName.get(i), "areaName"));
+                        areaNameComponent.setColor(net.md_5.bungee.api.ChatColor.GREEN);
+                        areaNameComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ssbs show " + "areaname"));
+                        areaNameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("click me to show particle on your area").create()));
+
+                        TextComponent numberOfAreaComponent = new TextComponent(String.format(String.valueOf(i + 1), "numberOfArea"));
+                        numberOfAreaComponent.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+
+                        player.spigot().sendMessage(areaNameComponent);
+
+//                        player.sendMessage(ChatColor.YELLOW + "" + (i + 1)  + ". " + ChatColor.GREEN + areaName.get(i));
 
                     }
                 }

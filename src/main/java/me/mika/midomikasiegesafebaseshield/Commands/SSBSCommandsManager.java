@@ -12,6 +12,7 @@ public class SSBSCommandsManager implements CommandExecutor {
     SiegeSafeBaseShield plugin;
     public SSBSCommandsManager(SiegeSafeBaseShield plugin) {
         this.plugin = plugin;
+
     }
     private ArrayList<SubCommands> subcommands = new ArrayList<>();
 
@@ -20,6 +21,7 @@ public class SSBSCommandsManager implements CommandExecutor {
         subcommands.add(new SaveCommand(plugin));
         subcommands.add(new DeleteCommand());
         subcommands.add(new ListCommand());
+        subcommands.add(new ShowParticleCommand());
 
     }
 
