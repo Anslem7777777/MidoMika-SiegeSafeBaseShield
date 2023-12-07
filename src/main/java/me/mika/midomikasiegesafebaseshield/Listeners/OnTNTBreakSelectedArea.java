@@ -4,6 +4,8 @@ import me.mika.midomikasiegesafebaseshield.Utils.BaseHealthBar;
 import me.mika.midomikasiegesafebaseshield.Utils.RefreshPlayerSelectedAreaConfig;
 import me.mika.midomikasiegesafebaseshield.Utils.RestoreRegionBlocks;
 import me.mika.midomikasiegesafebaseshield.SiegeSafeBaseShield;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -286,7 +288,8 @@ public class OnTNTBreakSelectedArea implements Listener {
 
                         if (playerAreaGetBreakBlockTime.toString().equals("{}")) {
                             playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(areaPlayerName), now);
-                            Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
+//                            Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
+                            sendActionBarMessage(Bukkit.getPlayer(areaPlayerName), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
 
                         }
                         Duration duration = Duration.between(playerAreaGetBreakBlockTime.get(Bukkit.getPlayer(areaPlayerName)), now);
@@ -294,19 +297,23 @@ public class OnTNTBreakSelectedArea implements Listener {
 
                         if (finalTime >= 5) {
                             if (bossBarProgress < 1 && bossBarProgress > 0.75) {
-                                Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
+//                                Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
+                                sendActionBarMessage(Bukkit.getPlayer(areaPlayerName), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
                                 playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(areaPlayerName), now);
 
                             } else if (bossBarProgress < 0.75 && bossBarProgress > 0.5) {
                                 Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 75% health" + ChatColor.YELLOW + " remaining");
+                                sendActionBarMessage(Bukkit.getPlayer(areaPlayerName), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 75% health" + ChatColor.YELLOW + " remaining");
                                 playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(areaPlayerName), now);
 
                             } else if (bossBarProgress < 0.5 && bossBarProgress > 0.25) {
-                                Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 50% health" + ChatColor.YELLOW + " remaining");
+//                                Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 50% health" + ChatColor.YELLOW + " remaining");
+                                sendActionBarMessage(Bukkit.getPlayer(areaPlayerName), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 50% health" + ChatColor.YELLOW + " remaining");
                                 playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(areaPlayerName), now);
 
                             } else if (bossBarProgress < 0.25 && bossBarProgress > 0) {
-                                Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 25% health" + ChatColor.YELLOW + " remaining");
+//                                Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 25% health" + ChatColor.YELLOW + " remaining");
+                                sendActionBarMessage(Bukkit.getPlayer(areaPlayerName), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 25% health" + ChatColor.YELLOW + " remaining");
                                 playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(areaPlayerName), now);
 
                             }
@@ -321,10 +328,12 @@ public class OnTNTBreakSelectedArea implements Listener {
 //                RestoreRegionBlocks.restoreBLockBeforeBreak(PlayerSelectedAreaConfig, p, areaPlayerName, areaSecondKey);
                     String areaName = PlayerSelectedAreaConfig.getString(areaPlayerName + "." + areaSecondKey + ".areaInfo" + ".name");
                     if (Bukkit.getPlayer(areaPlayerName) != null) {
-                        Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.DARK_RED + "Warning: your area " + ChatColor.GREEN + areaName + ChatColor.DARK_RED + " has been break!!");
+//                        Bukkit.getPlayer(areaPlayerName).sendMessage(ChatColor.DARK_RED + "Warning: your area " + ChatColor.GREEN + areaName + ChatColor.DARK_RED + " has been break!!");
+                        sendActionBarMessage(Bukkit.getPlayer(areaPlayerName), ChatColor.DARK_RED + "Warning: your area " + ChatColor.GREEN + areaName + ChatColor.DARK_RED + " has been break!!");
                     }
                     SiegeSafeBaseShield.areaUnderAttack = false;
-                    whoActiveTNT.sendMessage(ChatColor.GOLD + "Successfully Breakthrough the shield!");
+//                    whoActiveTNT.sendMessage(ChatColor.GOLD + "Successfully Breakthrough the shield!");
+                    sendActionBarMessage((Player) whoActiveTNT, ChatColor.GOLD + "Successfully Breakthrough the shield!");
                     int count = config.getInt(areaPlayerName + " Count");
                     count--;
                     config.set(areaPlayerName + " Count", count);
@@ -373,5 +382,9 @@ public class OnTNTBreakSelectedArea implements Listener {
         }else {
             e.setCancelled(true);
         }
+    }
+
+    private void sendActionBarMessage(Player player, String message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
     }
 }

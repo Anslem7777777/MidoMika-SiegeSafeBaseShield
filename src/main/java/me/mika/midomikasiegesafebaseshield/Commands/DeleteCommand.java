@@ -2,6 +2,8 @@ package me.mika.midomikasiegesafebaseshield.Commands;
 
 import me.mika.midomikasiegesafebaseshield.Utils.RefreshPlayerSelectedAreaConfig;
 import me.mika.midomikasiegesafebaseshield.Utils.RestoreRegionBlocks;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -86,7 +88,7 @@ public class DeleteCommand extends SubCommands {
                                 try {
                                     config.save(file);
                                     PlayerSelectedAreaConfig.save(PlayerSelectedAreaFile);
-                                    player.sendMessage(ChatColor.GREEN + "Area has been deleted.");
+                                    sendActionBarMessage(player, ChatColor.GREEN + "Area has been deleted.");
                                 } catch (IOException error) {
                                     System.out.println("Save File Error: " + error);
                                 }
@@ -101,7 +103,7 @@ public class DeleteCommand extends SubCommands {
                 }
             }
             if (!deletedSelectedBlock) {
-                player.sendMessage(ChatColor.RED + "Area Name Not Found!");
+                sendActionBarMessage(player, ChatColor.RED + "Area Name Not Found!");
             }
 
             //------------------------------------BEFORE--------------------------------------------//
@@ -212,8 +214,12 @@ public class DeleteCommand extends SubCommands {
 //            player.sendMessage(ChatColor.RED + "Example : /areadelete [name]");
 //
         }else {
-            player.sendMessage(ChatColor.RED + "Please select an area name to delete");
+            sendActionBarMessage(player, ChatColor.RED + "Please select an area name to delete");
 
         }
+    }
+
+    private void sendActionBarMessage(Player player, String message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
     }
 }

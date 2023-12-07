@@ -5,6 +5,8 @@ import me.mika.midomikasiegesafebaseshield.Utils.RefreshPlayerSelectedAreaConfig
 import me.mika.midomikasiegesafebaseshield.Utils.RestoreRegionBlocks;
 import me.mika.midomikasiegesafebaseshield.Utils.SaveDataToConfig;
 import me.mika.midomikasiegesafebaseshield.SiegeSafeBaseShield;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.boss.BarColor;
@@ -238,7 +240,7 @@ public class OnBreakSelectedArea implements Listener {
                     error.printStackTrace();
                 }
             } else {
-                p.sendMessage(ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
+                sendActionBarMessage(p, ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
                 e.setCancelled(true);
             }
 
@@ -299,7 +301,8 @@ public class OnBreakSelectedArea implements Listener {
                                     try {
                                         if (playerAreaGetBreakBlockTime.toString().equals("{}")) {
                                             playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(mainKey), now);
-                                            Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
+//                                            Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
+                                            sendActionBarMessage(Bukkit.getPlayer(mainKey), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
 
                                         }
                                         Duration duration = Duration.between(playerAreaGetBreakBlockTime.get(Bukkit.getPlayer(mainKey)), now);
@@ -307,19 +310,23 @@ public class OnBreakSelectedArea implements Listener {
 
                                         if (finalTime >= 5) {
                                             if (bossBarProgress < 1 && bossBarProgress > 0.75) {
-                                                Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
+//                                                Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
+                                                sendActionBarMessage(Bukkit.getPlayer(mainKey), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked!");
                                                 playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(mainKey), now);
 
                                             } else if (bossBarProgress < 0.75 && bossBarProgress > 0.5) {
-                                                Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 75% health" + ChatColor.YELLOW + " remaining");
+//                                                Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 75% health" + ChatColor.YELLOW + " remaining");
+                                                sendActionBarMessage(Bukkit.getPlayer(mainKey), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 75% health" + ChatColor.YELLOW + " remaining");
                                                 playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(mainKey), now);
 
                                             } else if (bossBarProgress < 0.5 && bossBarProgress > 0.25) {
-                                                Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 50% health" + ChatColor.YELLOW + " remaining");
+//                                                Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 50% health" + ChatColor.YELLOW + " remaining");
+                                                sendActionBarMessage(Bukkit.getPlayer(mainKey), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 50% health" + ChatColor.YELLOW + " remaining");
                                                 playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(mainKey), now);
 
                                             } else if (bossBarProgress < 0.25 && bossBarProgress > 0) {
-                                                Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 25% health" + ChatColor.YELLOW + " remaining");
+//                                                Bukkit.getPlayer(mainKey).sendMessage(ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 25% health" + ChatColor.YELLOW + " remaining");
+                                                sendActionBarMessage(Bukkit.getPlayer(mainKey), ChatColor.YELLOW + "Caution! Your area " + ChatColor.GREEN + areaName + ChatColor.YELLOW + " has been attacked and has only" + ChatColor.RED + " 25% health" + ChatColor.YELLOW + " remaining");
                                                 playerAreaGetBreakBlockTime.put(Bukkit.getPlayer(mainKey), now);
 
                                             }
@@ -331,7 +338,7 @@ public class OnBreakSelectedArea implements Listener {
 //                                    RestoreRegionBlocks.restoreBLockBeforeBreak(PlayerSelectedAreaConfig, p, mainKey, secondKeyAndNumber);
                                     String areaName = PlayerSelectedAreaConfig.getString(mainKey + "." + secondKey + ".areaInfo" + ".name");
                                     SiegeSafeBaseShield.areaUnderAttack = false;
-                                    p.sendMessage(ChatColor.GOLD + "Successfully Breakthrough the shield!");
+                                    sendActionBarMessage(p,ChatColor.GOLD + "Successfully Breakthrough the shield!");
                                     int count = config.getInt(mainKey + " Count");
                                     count--;
                                     config.set(mainKey + " Count", count);
@@ -363,7 +370,8 @@ public class OnBreakSelectedArea implements Listener {
                                     }
                                     secondKeyCount = 0;
                                     if (Bukkit.getPlayer(mainKey) != null) {
-                                        Bukkit.getPlayer(mainKey).sendMessage(ChatColor.DARK_RED + "Warning: your area " + ChatColor.GREEN + areaName + ChatColor.DARK_RED + " has been break!!");
+//                                        Bukkit.getPlayer(mainKey).sendMessage(ChatColor.DARK_RED + "Warning: your area " + ChatColor.GREEN + areaName + ChatColor.DARK_RED + " has been break!!");
+                                        sendActionBarMessage(Bukkit.getPlayer(mainKey),ChatColor.DARK_RED + "Warning: your area " + ChatColor.GREEN + areaName + ChatColor.DARK_RED + " has been break!!");
                                     }
                                 }
 
@@ -540,5 +548,9 @@ public class OnBreakSelectedArea implements Listener {
 
         //TODO - 好像空手interact block会触发一些null exception 要检查，TNT炸的时候离开两格会有几率炸爆area block
 
+    }
+
+    private void sendActionBarMessage(Player player, String message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
     }
 }

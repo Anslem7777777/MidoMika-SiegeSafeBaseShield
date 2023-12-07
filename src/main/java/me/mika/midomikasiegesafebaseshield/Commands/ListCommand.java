@@ -47,7 +47,6 @@ public class ListCommand extends SubCommands{
                     if(mainKey.contains(player.getName())){
                         for(String secondKey : PlayerSelectedAreaConfig.getConfigurationSection(mainKey).getKeys(false)){
                             if (!secondKey.equals("Number-Of-Selected-Location")) {
-//                                player.sendMessage(ChatColor.YELLOW + PlayerSelectedAreaConfig.getString(mainKey + "." + secondKey + ".areaInfo" + ".name"));
                                 areaName.add(PlayerSelectedAreaConfig.getString(mainKey + "." + secondKey + ".areaInfo" + ".name"));
                                 isNull = false;
 
@@ -61,10 +60,10 @@ public class ListCommand extends SubCommands{
                 }else {
                     player.sendMessage(ChatColor.YELLOW + "Saved Area List ("+ ChatColor.YELLOW + playerLitmitLeft + ChatColor.YELLOW + "/" + ChatColor.YELLOW + areaLimit + ChatColor.YELLOW + "): ");
                     for (int i = 0; i < areaName.size(); i++) {
-                        TextComponent areaNameComponent = new TextComponent(String.format(areaName.get(i), "areaName"));
+                        TextComponent areaNameComponent = new TextComponent(String.format(areaName.get(i), areaName.get(i)));
                         areaNameComponent.setColor(net.md_5.bungee.api.ChatColor.GREEN);
-                        areaNameComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ssbs show " + "areaname"));
-                        areaNameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("click me to show particle on your area").create()));
+                        areaNameComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ssbs show " + areaNameComponent.getText()));
+                        areaNameComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click me to display your base").color(net.md_5.bungee.api.ChatColor.AQUA).create()));
 
                         TextComponent numberOfAreaComponent = new TextComponent(String.format(String.valueOf(i + 1), "numberOfArea"));
                         numberOfAreaComponent.setColor(net.md_5.bungee.api.ChatColor.YELLOW);

@@ -6,6 +6,8 @@ import me.mika.midomikasiegesafebaseshield.Utils.BaseHealthBar;
 import me.mika.midomikasiegesafebaseshield.test.*;
 import me.mika.midomikasiegesafebaseshield.Files.ConfigSetup;
 import me.mika.midomikasiegesafebaseshield.Listeners.*;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -126,7 +128,7 @@ public final class SiegeSafeBaseShield extends JavaPlugin {
 
                                         playerSelectedAreaConfig.set(mainKey + "." + secondKey + ".areaInfo.totalBlockHardness", repairTotalHardness);
                                         try {
-                                            Bukkit.getPlayer(mainKey).sendMessage(ChatColor.GREEN + "Your area has been repair!");
+                                            Bukkit.getPlayer(mainKey).spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "Your area has been repair!"));
                                             Bukkit.getPlayer(mainKey).playSound(Bukkit.getPlayer(mainKey).getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2.0f, 1.0f);
                                             onBreakSelectedArea.playerAreaGetBreakBlockTime.clear();
                                         }catch (Exception e){

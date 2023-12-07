@@ -2,6 +2,8 @@ package me.mika.midomikasiegesafebaseshield.Utils;
 
 import me.mika.midomikasiegesafebaseshield.Listeners.OnPlayerItemHeld;
 import me.mika.midomikasiegesafebaseshield.Listeners.SelectArea;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,7 +29,8 @@ public class SetRegionBorderToGoldBlocks {
 
 
         if (blockCount > areaBlockLimit) {
-            player.sendMessage(ChatColor.RED + "The size of the area cannot exceed " + areaBlockLimit);
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.RED + "The size of the area cannot exceed " + areaBlockLimit));
+
 
         } else if (blockCount < areaBlockLimit) {
             for (int x = minX; x <= maxX; x++) {

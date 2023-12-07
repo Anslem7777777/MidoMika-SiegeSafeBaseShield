@@ -1,6 +1,8 @@
 package me.mika.midomikasiegesafebaseshield.Listeners;
 
 import me.mika.midomikasiegesafebaseshield.SiegeSafeBaseShield;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.block.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -85,7 +87,8 @@ public class OnPlacePiston implements Listener {
         }
 
         if (e.isCancelled()){
-            p.sendMessage(ChatColor.RED + "Piston cannot be placed within 13 blocks of another player's area.");
+//            p.sendMessage(ChatColor.RED + "Piston cannot be placed within 13 blocks of another player's area.");
+            sendActionBarMessage(p, ChatColor.RED + "Piston cannot be placed within 13 blocks of another player's area.");
         }
     }
 
@@ -132,6 +135,10 @@ public class OnPlacePiston implements Listener {
         String blockAroundPistonLocationString = blockAroundPistonWorld + ";" + blockAroundPistonLocationX + ";" + blockAroundPistonLocationY + ";" + blockAroundPistonLocationZ;
 
         return blockAroundPistonLocationString;
+    }
+
+    private void sendActionBarMessage(Player player, String message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
     }
 
 }

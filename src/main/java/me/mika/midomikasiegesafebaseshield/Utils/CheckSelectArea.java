@@ -1,6 +1,8 @@
 package me.mika.midomikasiegesafebaseshield.Utils;
 
 import me.mika.midomikasiegesafebaseshield.Listeners.SelectArea;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -47,7 +49,7 @@ public class CheckSelectArea {
                         if (allRecordBlock.values().toString().contains(selectedBlockCheckString)) {
                             selection[0] = null;
                             selection[1] = null;
-                            p.sendMessage(ChatColor.RED + "The area cannot be select as it has already been set.");
+                            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.RED + "The area cannot be select as it has already been set."));
                             break outerLoop;
 
                         } else {
@@ -69,10 +71,10 @@ public class CheckSelectArea {
 
         if(allRecordBlock.values().toString().contains(leftClickSelectionLocationString)){
             selection[0] = null;
-            p.sendMessage(ChatColor.RED + "The area cannot be select as it has already been set.");
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.RED + "The area cannot be select as it has already been set."));
 
         }else {
-            p.sendMessage(ChatColor.GREEN + "First point has been set.");
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "First point has been set."));
 
         }
     }
@@ -87,10 +89,10 @@ public class CheckSelectArea {
 
         if(allRecordBlock.values().toString().contains(leftClickSelectionLocationString)){
             selection[0] = null;
-            p.sendMessage(ChatColor.RED + "The area cannot be select as it has already been set.");
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.RED + "The area cannot be select as it has already been set."));
 
         }else {
-            p.sendMessage(ChatColor.GREEN + "First point has been reset.");
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "First point has been reset."));
 
         }
     }
@@ -105,10 +107,10 @@ public class CheckSelectArea {
 
         if(allRecordBlock.values().toString().contains(rightClickSelectionLocationString)){
             selection[1] = null;
-            p.sendMessage(ChatColor.RED + "The area cannot be select as it has already been set.");
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.RED + "The area cannot be select as it has already been set."));
 
         }else {
-            p.sendMessage(ChatColor.GREEN + "Second point has been set.");
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.GREEN + "Second point has been set."));
 
         }
     }
@@ -123,12 +125,11 @@ public class CheckSelectArea {
 
         if(allRecordBlock.values().toString().contains(rightClickSelectionLocationString)){
             selection[1] = null;
-            p.sendMessage(ChatColor.RED + "The area cannot be select as it has already been set.");
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.RED + "The area cannot be select as it has already been set."));
 
         }else {
-            p.sendMessage(ChatColor.DARK_GREEN + "Second point has been reset.");
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.DARK_GREEN + "Second point has been reset."));
 
         }
     }
-
 }

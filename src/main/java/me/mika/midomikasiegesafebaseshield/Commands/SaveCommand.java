@@ -5,6 +5,8 @@ import me.mika.midomikasiegesafebaseshield.Listeners.SelectArea;
 import me.mika.midomikasiegesafebaseshield.Utils.SaveDataToConfig;
 import me.mika.midomikasiegesafebaseshield.Utils.SaveSelectedBlocks;
 import me.mika.midomikasiegesafebaseshield.Utils.SetRegionBorderToGoldBlocks;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -124,7 +126,7 @@ public class SaveCommand extends SubCommands{
                         if (blockCount > areaBlockLimit) {
 
                         } else if (blockCount < areaBlockLimit) {
-                            player.sendMessage(ChatColor.GREEN + "Saved " + "'" + areaName + "'");
+                            sendActionBarMessage(player, ChatColor.GREEN + "Saved " + "'" + areaName + "'");
 
                             //save selected area to config
                             config.set(player.getName() + " Count", count);
@@ -165,7 +167,7 @@ public class SaveCommand extends SubCommands{
                         if (blockCount > areaBlockLimit) {
 
                         } else if (blockCount < areaBlockLimit) {
-                            player.sendMessage(ChatColor.GREEN + "Saved " + "'" + areaName + "'");
+                            sendActionBarMessage(player, ChatColor.GREEN + "Saved " + "'" + areaName + "'");
 
                             try {
                                 config.save(file);
@@ -187,15 +189,19 @@ public class SaveCommand extends SubCommands{
 
                     }
                 } else {
-                    player.sendMessage(ChatColor.RED + "You need to select an area before save!");
+                    sendActionBarMessage(player, ChatColor.RED + "You need to select an area before save!");
                 }
             } else if (nameValueList.contains(areaName)) {
-                player.sendMessage(ChatColor.RED + "The area name has been repeated, please change.");
+                sendActionBarMessage(player, ChatColor.RED + "The area name has been repeated, please change.");
             }
         } else {
-            player.sendMessage(ChatColor.RED + "Example : /bsg save [name]");
+            sendActionBarMessage(player, ChatColor.RED + "Example : /bsg save [name]");
 
         }
         nameValueList.clear();
+    }
+
+    private void sendActionBarMessage(Player player, String message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
     }
 }

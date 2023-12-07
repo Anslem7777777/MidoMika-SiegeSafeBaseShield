@@ -2,6 +2,8 @@ package me.mika.midomikasiegesafebaseshield.Listeners;
 
 import me.mika.midomikasiegesafebaseshield.SiegeSafeBaseShield;
 import me.mika.midomikasiegesafebaseshield.Utils.CheckSelectArea;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -113,7 +115,8 @@ public class SelectArea implements Listener {
                         CheckSelectArea.checkSelectArea(allRecordBlock, player);
 
                     } else if (selection[0] == null && selection[1] == null && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                        player.sendMessage(ChatColor.RED + "请先设置第一个点");
+//                        player.sendMessage(ChatColor.RED + "Please set the first point.");
+                        sendActionBarMessage(player, ChatColor.RED + "Please set the first point.");
 
                     }
                     // 保存玩家的选择区域(需要）
@@ -152,7 +155,8 @@ public class SelectArea implements Listener {
                             CheckSelectArea.checkSelectArea(allRecordBlock, player);
 
                         } else if (selection[0] == null && selection[1] == null && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                            player.sendMessage(ChatColor.RED + "请先设置第一个点");
+//                            player.sendMessage(ChatColor.RED + "请先设置第一个点");
+                            sendActionBarMessage(player, ChatColor.RED + "Please set the first point.");
 
                         }
 
@@ -161,13 +165,17 @@ public class SelectArea implements Listener {
                     }
                 } else if (count >= limit) {
                     e.setCancelled(true);
-                    player.sendMessage(ChatColor.RED + "Over limit");
+                    sendActionBarMessage(player, ChatColor.RED + "Exceeded the limit.");
 
                 }
             }
             allRecordBlock.clear();
         }
 
+    }
+
+    private void sendActionBarMessage(Player player, String message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
     }
 }
 

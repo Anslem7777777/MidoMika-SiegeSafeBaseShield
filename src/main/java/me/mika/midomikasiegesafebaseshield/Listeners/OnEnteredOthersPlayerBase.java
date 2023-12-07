@@ -1,6 +1,8 @@
 package me.mika.midomikasiegesafebaseshield.Listeners;
 
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -56,13 +58,15 @@ public class OnEnteredOthersPlayerBase implements Listener {
         if (selectedAreaOriBlocks.contains(blockUnderPlayerLocString) || selectedAreaOriBlocks.contains(blockUnderPlayerLocString2) || selectedAreaOriBlocks.contains(blockUnderPlayerLocString3)) {
             if (playerIsEnteredOthersBase.get(p.getUniqueId()) == null || playerIsEnteredOthersBase.get(p.getUniqueId()) == false) {
                 playerIsEnteredOthersBase.put(p.getUniqueId(), true);
-                p.sendMessage(ChatColor.of(new Color(255, 165, 0, 10)) + "Caution: You Are Entering Other Players' Territory!");
+//                p.sendMessage(ChatColor.of(new Color(255, 165, 0, 10)) + "Caution: You Are Entering Other Players' Territory!");
+                p.sendTitle(" ", ChatColor.of(new Color(255, 165, 0, 10)) + "Caution: Entering Other Players' Territory!", 20, 0, 20);
 
             }
         }else {
             if (playerIsEnteredOthersBase.get(p.getUniqueId()) != null && playerIsEnteredOthersBase.get(p.getUniqueId()) == true){
                 playerIsEnteredOthersBase.put(p.getUniqueId(), false);
-                p.sendMessage(ChatColor.of(new Color(255, 165, 0, 10)) + "You Have Left Other Players' Territory");
+//                p.sendMessage(ChatColor.of(new Color(255, 165, 0, 10)) + "You Have Left Other Players' Territory");
+                p.sendTitle(" ", ChatColor.of(new Color(255, 165, 0, 10)) + "Left Other Players' Territory", 20, 0, 20);
 
             }
         }

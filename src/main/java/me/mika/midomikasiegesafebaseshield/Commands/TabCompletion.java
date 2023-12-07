@@ -40,12 +40,10 @@ public class TabCompletion implements TabCompleter {
             for (String mainKey : PlayerSelectedAreaConfig.getKeys(false)){
                 if (mainKey.equals(p.getName())){
                     for (String secondKey : PlayerSelectedAreaConfig.getConfigurationSection(mainKey).getKeys(false)){
-                        if (secondKey != "Number-Of-Selected-Location"){
+                        if (!secondKey.equalsIgnoreCase("Number-Of-Selected-Location")){
                             String configAreaName = PlayerSelectedAreaConfig.getString(mainKey + "." + secondKey + "." + ".areaInfo" + ".name");
-                            if (!configAreaName.equalsIgnoreCase("VerifySlot")) {
-                                arguments.add(configAreaName);
+                            arguments.add(configAreaName);
 
-                            }
                         }
                     }
                 }

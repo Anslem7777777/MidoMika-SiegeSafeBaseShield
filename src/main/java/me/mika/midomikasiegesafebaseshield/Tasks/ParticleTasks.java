@@ -43,9 +43,7 @@ public class ParticleTasks extends BukkitRunnable {
                                 for (String secondKey : playerSelectedAreaConfig.getConfigurationSection(mainKey).getKeys(false)) {
                                     if (!secondKey.equals("Number-Of-Selected-Location")) {
                                         for (String key : playerSelectedAreaConfig.getConfigurationSection(mainKey + "." + secondKey + "." + ".areaInfo" + ".selectedBlocks").getKeys(false)) {
-
                                             String[] coordinates = key.split(";");
-
                                             // 从字符串数组中解析出坐标信息
                                             if (coordinates.length == 4) {
                                                 String worldName = coordinates[0];

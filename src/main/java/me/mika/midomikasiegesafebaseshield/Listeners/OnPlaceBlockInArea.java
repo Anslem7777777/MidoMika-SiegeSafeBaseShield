@@ -2,6 +2,8 @@ package me.mika.midomikasiegesafebaseshield.Listeners;
 
 import me.mika.midomikasiegesafebaseshield.Utils.SaveDataToConfig;
 import me.mika.midomikasiegesafebaseshield.SiegeSafeBaseShield;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
@@ -107,7 +109,8 @@ public class OnPlaceBlockInArea implements Listener {
 
         if (allConfigBlock == true && selfConfigBlock != true){
             e.setCancelled(true);
-            whoPlaceTheBlock.sendMessage(ChatColor.RED + "Block cannot be placed in other player’s area");
+//            whoPlaceTheBlock.sendMessage(ChatColor.RED + "Block cannot be placed in other player’s area");
+            sendActionBarMessage(whoPlaceTheBlock, ChatColor.RED + "Block cannot be placed in other player’s area");
 
         }else if (allConfigBlock == true && selfConfigBlock == true){
             //自己的block
@@ -195,7 +198,8 @@ public class OnPlaceBlockInArea implements Listener {
                     error.printStackTrace();
                 }
             }else {
-                whoPlaceTheBlock.sendMessage(ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
+//                whoPlaceTheBlock.sendMessage(ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
+                sendActionBarMessage(whoPlaceTheBlock, ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
                 e.setCancelled(true);
             }
         }
@@ -274,7 +278,7 @@ public class OnPlaceBlockInArea implements Listener {
                 } else if (allConfigBlock == true && selfConfigBlock != true) {
                     //别人的area
                     e.setCancelled(true);
-                    p.sendMessage(ChatColor.RED + "This area belongs to another player. You cannot use this item.");
+                    sendActionBarMessage(p, ChatColor.RED + "This area belongs to another player. You cannot use this item.");
 
 
                 }
@@ -546,14 +550,16 @@ public class OnPlaceBlockInArea implements Listener {
                     error.printStackTrace();
                 }
             }else {
-                whoEmptyBucket.sendMessage(ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
+//                whoEmptyBucket.sendMessage(ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
+                sendActionBarMessage(whoEmptyBucket, ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
                 e.setCancelled(true);
             }
 
         } else if (whoEmptyBucketAllConfigBlock == true && whoEmptyBucketSelfConfigBlock == false) {
             //其他人的block
             e.setCancelled(true);
-            whoEmptyBucket.sendMessage(ChatColor.RED + "Water cannot be placed in other player’s area");
+//            whoEmptyBucket.sendMessage(ChatColor.RED + "Water cannot be placed in other player’s area");
+            sendActionBarMessage(whoEmptyBucket, ChatColor.RED + "Water cannot be placed in other player’s area");
 
         }
     }
@@ -653,14 +659,16 @@ public class OnPlaceBlockInArea implements Listener {
                     error.printStackTrace();
                 }
             }else {
-                whoFillBucket.sendMessage(ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
+//                whoFillBucket.sendMessage(ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
+                sendActionBarMessage(whoFillBucket, ChatColor.RED + "Your area is currently under attack. You cannot edit any blocks.");
                 e.setCancelled(true);
             }
 
         } else if (allConfigBlock == true && selfConfigBlock != true) {
             //其他人的block
             e.setCancelled(true);
-            whoEmptyBucket.sendMessage(ChatColor.RED + "Cannot fill water in other player’s area");
+//            whoEmptyBucket.sendMessage(ChatColor.RED + "Cannot fill water in other player’s area");
+            sendActionBarMessage(whoEmptyBucket, ChatColor.RED + "Cannot fill water in other player’s area");
 
         }
     }
@@ -674,6 +682,10 @@ public class OnPlaceBlockInArea implements Listener {
         String blockAroundFireLocationString = blockAroundFireWorld + ";" + blockAroundFireLocationX + ";" + blockAroundFireLocationY + ";" + blockAroundFireLocationZ;
 
         return blockAroundFireLocationString;
+    }
+
+    private void sendActionBarMessage(Player player, String message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
     }
 
 }
